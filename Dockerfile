@@ -1,15 +1,17 @@
 # Original credit: https://github.com/jpetazzo/dockvpn
+# Semi-original credit: https://github.com/kylemanna/docker-openvpn
 
 # Smallest base image
-FROM alpine:latest
+FROM ubuntu:latest
 
-LABEL maintainer="Kyle Manna <kyle@kylemanna.com>"
+LABEL maintainer="Javier Godinez <godinezj@gmail.com>"
 
-# Testing: pamtester
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories && \
-    apk add --update openvpn iptables bash easy-rsa openvpn-auth-pam google-authenticator pamtester && \
-    ln -s /usr/share/easy-rsa/easyrsa /usr/local/bin && \
-    rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/*
+# Install dependencies
+RUN apt-get update && apt-get upgrade && apt-get install -y openvpn openvpn-auth-ldap dnsmasq curl iptables
+RUN curl -sO http://archive.ubuntu.com/ubuntu/pool/universe/e/easy-rsa/easy-rsa_3.0.4-2_all.deb && \
+    dpkg -i easy-rsa_3.0.4-2_all.deb && rm easy-rsa_3.0.4-2_all.deb && \
+    apt-get clean && \
+    ln -s /usr/share/easy-rsa/easyrsa /usr/local/bin
 
 # Needed by scripts
 ENV OPENVPN /etc/openvpn
