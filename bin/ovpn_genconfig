@@ -409,4 +409,8 @@ if diff -q "${bak:-}" "$conf" 2>/dev/null; then
     rm -fv "$bak"
 fi
 
+echo -e "\n\nAdd LDAP support" >> "$conf"
+echo "plugin /usr/lib/openvpn/openvpn-auth-ldap.so /etc/openvpn/auth/auth-ldap.conf" >> "$conf"
+echo "client-cert-not-required" >> "$conf"
+
 echo "Successfully generated config"

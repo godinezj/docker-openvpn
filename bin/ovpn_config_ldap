@@ -1,0 +1,29 @@
+#!/bin/bash
+#
+#
+
+URL="$1"
+BIND_DN="$2"
+PASSWD="$3"
+BASE_DN=$(echo $BIND_DN | sed 's/cn=[a-z]*,//')
+
+mkdir /etc/openvpn/auth
+cat <<EOF> /etc/openvpn/auth/auth-ldap.conf
+<LDAP>
+URL             ${URL}
+BindDN          ${BIND_DN}
+Password        ${PASSWD}
+
+# Network timeout (in seconds)
+Timeout         15
+</LDAP>
+
+<Authorization>
+BaseDN          ${BASE_DN}
+# User Search Filter
+SearchFilter    "(&(cn=%u))"
+# Require Group Membership
+RequireGroup    false
+</Authorization>
+EOF
+
