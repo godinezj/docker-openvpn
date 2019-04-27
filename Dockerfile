@@ -1,9 +1,7 @@
 # Original credit: https://github.com/jpetazzo/dockvpn
 # Semi-original credit: https://github.com/kylemanna/docker-openvpn
 
-# Smallest base image
 FROM ubuntu:latest
-
 LABEL maintainer="Javier Godinez <godinezj@gmail.com>"
 
 # Install dependencies
