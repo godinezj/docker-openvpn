@@ -5,7 +5,7 @@ FROM ubuntu:latest
 LABEL maintainer="Javier Godinez <godinezj@gmail.com>"
 
 # Install dependencies
-RUN apt-get update && apt-get upgrade && apt-get install -y openvpn openvpn-auth-ldap dnsmasq curl iptables
+RUN apt-get update && apt-get -y upgrade && apt-get install -y openvpn openvpn-auth-ldap dnsmasq curl iptables
 RUN curl -sO http://archive.ubuntu.com/ubuntu/pool/universe/e/easy-rsa/easy-rsa_3.0.4-2_all.deb && \
     dpkg -i easy-rsa_3.0.4-2_all.deb && rm easy-rsa_3.0.4-2_all.deb && \
     apt-get clean && \
