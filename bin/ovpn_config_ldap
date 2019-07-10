@@ -21,7 +21,7 @@ Timeout         15
 <Authorization>
 BaseDN          ${BASE_DN}
 # User Search Filter
-SearchFilter    "(&(cn=%u))"
+SearchFilter    "(&(uid=%u))"
 # Require Group Membership
 RequireGroup    false
 </Authorization>
